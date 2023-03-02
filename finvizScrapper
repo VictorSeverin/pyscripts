@@ -1,0 +1,19 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.headless = True
+
+driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
+driver.get("http://finviz.com/quote.ashx?t=AAPL")
+
+float = driver.find_element("xpath", "/html/body/div[4]/div/table[2]/tbody/tr[2]/td[10]/b").text
+inst_own = driver.find_element("xpath", "/html/body/div[4]/div/table[2]/tbody/tr[3]/td[8]/b").text
+market_cap = driver.find_element("xpath", "/html/body/div[4]/div/table[2]/tbody/tr[2]/td[2]/b").text
+
+print(f"Float: {float}")
+print(f"Institutional Ownership: {inst_own}")
+print(f"Market Cap: {market_cap}")
+
+driver.quit()
